@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "NotaryCore.Cli/1.0.0": {
+        "dependencies": {
+          "NotaryCore.Domain": "1.0.0"
+        },
+        "runtime": {
+          "NotaryCore.Cli.dll": {}
+        }
+      },
+      "NotaryCore.Domain/1.0.0": {
+        "runtime": {
+          "NotaryCore.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NotaryCore.Cli/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NotaryCore.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
