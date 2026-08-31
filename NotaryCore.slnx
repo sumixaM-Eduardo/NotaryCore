@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/NotaryCore.Api/NotaryCore.Api.csproj" />
     <Project Path="src/NotaryCore.Cli/NotaryCore.Cli.csproj" />
     <Project Path="src/NotaryCore.Domain/NotaryCore.Domain.csproj" />
   </Folder>

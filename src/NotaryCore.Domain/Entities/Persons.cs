@@ -1,6 +1,7 @@
 namespace NotaryCore.Domain.Entities;
 public class Person
 {
+    public int Id { get; set; }
     public required string Cpf { get; set; }
     public required string Name { get; set; }
     public string? Cnpj { get; set; }
@@ -8,5 +9,4 @@ public class Person
     public required string Nationality { get; set; }
     public DateTime? DateBirth { get; set; }
     public required string Address { get; set; }
-
 }

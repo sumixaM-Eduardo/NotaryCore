@@ -4,7 +4,6 @@ public enum Role
     Buyer,
     Seller
 }
-
 public enum AcType
 {
     purchaseAndSale
