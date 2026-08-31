@@ -10,4 +10,5 @@ public class NotarycoreDbContext : DbContext
     {
     }
     public DbSet<Person> Persons { get; set; } 
+    public DbSet<Protocol> Protocols { get; set; }
 }

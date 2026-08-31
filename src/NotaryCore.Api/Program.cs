@@ -19,26 +19,35 @@ app.MapGet("/db-test", async (NotarycoreDbContext db) =>
 
     return Results.Problem("Não foi possível conectar ao banco.");
 });
-app.MapGet("/person/{id}", async (int id, NotarycoreDbContext db) =>
+
+
+
+
+
+
+
+
+
+app.MapGet("/persons/{id}", async (int id, NotarycoreDbContext db) =>
 {
     Person? person = await db.Persons.FindAsync(id);
-    if (person != null){
-        return Results.Ok(person);
+    if (person == null){
+        return Results.NotFound();
     }
-    return Results.NotFound();
+    return Results.Ok(person);
 });
 app.MapGet("/persons", async (NotarycoreDbContext db) =>
 {
     List<Person> persons = await db.Persons.ToListAsync();
     return Results.Ok(persons);
 });
-app.MapPost("/person", async (Person person, NotarycoreDbContext db) =>
+app.MapPost("/persons", async (Person person, NotarycoreDbContext db) =>
 {
     db.Persons.Add(person);
-    int result = await db.SaveChangesAsync();
-    return Results.Created($"/person/{person.Id}", person);
+    await db.SaveChangesAsync();
+    return Results.Created($"/persons/{person.Id}", person);
 });
-app.MapPut("/person/{id}", async (int id, Person updatePerson, NotarycoreDbContext db) =>
+app.MapPut("/persons/{id}", async (int id, Person updatePerson, NotarycoreDbContext db) =>
 {
     Person? person = await db.Persons.FindAsync(id);
     if (person == null)
@@ -50,7 +59,7 @@ app.MapPut("/person/{id}", async (int id, Person updatePerson, NotarycoreDbConte
     await db.SaveChangesAsync();
     return Results.Ok(person);
 });
-app.MapDelete("/person/{id}", async (int id, NotarycoreDbContext db) =>
+app.MapDelete("/persons/{id}", async (int id, NotarycoreDbContext db) =>
 {   
     Person? person = await db.Persons.FindAsync(id);
     if(person == null){
@@ -59,4 +68,48 @@ app.MapDelete("/person/{id}", async (int id, NotarycoreDbContext db) =>
     db.Persons.Remove(person);
     await db.SaveChangesAsync();
     return Results.NoContent();
+});
+app.MapGet("/protocols/{id}", async (int id, NotarycoreDbContext db) =>
+{
+    Protocol? protocol = await db.Protocols.FindAsync(id);
+    if(protocol == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(protocol);
+});
+app.MapGet("/protocols", async (NotarycoreDbContext db) =>
+{
+    List<Protocol> protocols = await db.Protocols.ToListAsync();
+    return Results.Ok(protocols);
+});
+app.MapPost("/protocols", async (Protocol protocol, NotarycoreDbContext db) =>
+{
+    db.Protocols.Add(protocol);
+    await db.SaveChangesAsync();
+    return Results.Created($"/protocols/{protocol.Id}", protocol);
+});
+app.MapPut("/protocols/{id}", async (int id, Protocol updateProtocol, NotarycoreDbContext db) =>
+{
+    Protocol? protocol = await db.Protocols.FindAsync(id);
+    if(protocol == null)
+    {
+        return Results.NotFound();
+    } 
+    protocol.OpeningDate = updateProtocol.OpeningDate;
+    protocol.Status = updateProtocol.Status;
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+app.MapDelete("/protocols/{id}", async (int id, NotarycoreDbContext db) =>
+{
+   Protocol? protocol = await db.Protocols.FindAsync(id);
+   if(protocol == null)
+    {
+        return Results.NotFound();
+    }
+    db.Protocols.Remove(protocol);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+
 });
