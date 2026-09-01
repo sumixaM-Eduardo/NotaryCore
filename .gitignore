@@ -1,0 +1,77 @@
+# =========================
+# .NET build
+# =========================
+bin/
+obj/
+
+# Build configurations
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# =========================
+# .NET generated files
+# =========================
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# =========================
+# NuGet
+# =========================
+packages/
+*.nupkg
+*.snupkg
+
+# NuGet generated files
+project.assets.json
+project.nuget.cache
+*.nuget.dgspec.json
+
+# =========================
+# Visual Studio
+# =========================
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# JetBrains Rider
+# =========================
+.idea/
+*.sln.iml
+
+# =========================
+# Test results / coverage
+# =========================
+TestResults/
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# =========================
+# Operating System
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
