@@ -1,77 +1,342 @@
-# =========================
-# .NET build
-# =========================
-bin/
-obj/
+# ============================================
 
-# Build configurations
-[Bb]uild/
+# NotaryCore - .gitignore
+
+# .NET + ASP.NET Core + React + TypeScript
+
+# ============================================
+
+# --------------------------------------------
+
+# .NET / C#
+
+# --------------------------------------------
+
+# Build results
+
+[Bb]in/
+[Oo]bj/
 [Dd]ebug/
 [Rr]elease/
 x64/
 x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
 
-# =========================
 # .NET generated files
-# =========================
+
 *.dll
 *.exe
 *.pdb
 *.cache
-*.log
+*.deps.json
+*.runtimeconfig.json
 
-# =========================
 # NuGet
-# =========================
-packages/
+
 *.nupkg
 *.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
 
 # NuGet generated files
-project.assets.json
-project.nuget.cache
-*.nuget.dgspec.json
 
-# =========================
+*.nuget.props
+*.nuget.targets
+
+# Publish output
+
+publish/
+Published/
+
+# --------------------------------------------
+
+# ASP.NET Core
+
+# --------------------------------------------
+
+# Development secrets / local configuration
+
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.Local.json
+
+# User secrets should never be committed
+
+secrets.json
+
+# HTTPS development certificates
+
+*.pfx
+*.p12
+*.cer
+*.crt
+*.key
+*.pem
+
+# --------------------------------------------
+
+# Entity Framework Core
+
+# --------------------------------------------
+
+# Local SQLite databases, if ever used
+
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# IMPORTANT:
+
+# Do NOT ignore EF Core migrations.
+
+# Migrations should normally be committed.
+
+# --------------------------------------------
+
+# Node.js / React / TypeScript
+
+# --------------------------------------------
+
+node_modules/
+
+# Production builds
+
+dist/
+build/
+out/
+
+# Vite
+
+.vite/
+
+# Next.js, if used in the future
+
+.next/
+
+# TypeScript build info
+
+*.tsbuildinfo
+
+# npm
+
+npm-debug.log*
+.npm/
+
+# Yarn
+
+yarn-debug.log*
+yarn-error.log*
+.yarn/
+
+# pnpm
+
+pnpm-debug.log*
+.pnpm-store/
+
+# --------------------------------------------
+
+# Environment variables / Secrets
+
+# --------------------------------------------
+
+.env
+.env.*
+!.env.example
+
+# Local secrets
+
+*.secret
+*.secrets
+secrets/
+credentials/
+credentials.json
+
+# --------------------------------------------
+
+# IDEs / Editors
+
+# --------------------------------------------
+
 # Visual Studio
-# =========================
+
 .vs/
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
 
-# =========================
-# VS Code
-# =========================
-.vscode/
+# JetBrains Rider / IntelliJ
 
-# =========================
-# JetBrains Rider
-# =========================
 .idea/
 *.sln.iml
 
-# =========================
-# Test results / coverage
-# =========================
+# VS Code
+
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+
+# --------------------------------------------
+
+# Operating System Files
+
+# --------------------------------------------
+
+# Linux
+
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# macOS
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+$RECYCLE.BIN/
+
+# --------------------------------------------
+
+# Logs
+
+# --------------------------------------------
+
+*.log
+logs/
+Logs/
+
+# --------------------------------------------
+
+# Temporary files
+
+# --------------------------------------------
+
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+
+tmp/
+temp/
+
+# --------------------------------------------
+
+# Test / Coverage
+
+# --------------------------------------------
+
 TestResults/
 coverage/
 coverage.*
 *.coverage
 *.coveragexml
 
-# =========================
-# Operating System
-# =========================
-.DS_Store
-Thumbs.db
+# Playwright
 
-# =========================
-# Temporary files
-# =========================
-*.tmp
-*.temp
+playwright-report/
+test-results/
+
+# Cypress
+
+cypress/videos/
+cypress/screenshots/
+
+# --------------------------------------------
+
+# Docker
+
+# --------------------------------------------
+
+# Local overrides
+
+docker-compose.override.yml
+compose.override.yml
+
+# --------------------------------------------
+
+# Database dumps
+
+# --------------------------------------------
+
+*.sql
+*.dump
+*.backup
 *.bak
-*.swp
-*~
+
+# Keep explicitly versioned database scripts
+
+!scripts/**/*.sql
+!database/**/*.sql
+
+# --------------------------------------------
+
+# Generated documents
+
+# --------------------------------------------
+
+# NotaryCore may generate PDFs/DOCX/LaTeX output.
+
+# Ignore generated runtime output, but not templates.
+
+generated/
+output/
+exports/
+
+# LaTeX temporary files
+
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# --------------------------------------------
+
+# Local storage / uploads
+
+# --------------------------------------------
+
+uploads/
+storage/
+data/local/
+
+# --------------------------------------------
+
+# Misc
+
+# --------------------------------------------
+
+*.orig
+*.rej
+*.pid
+*.lock
+
+# Keep package manager lockfiles.
+
+# DO NOT ignore:
+
+# package-lock.json
+
+# yarn.lock
+
+# pnpm-lock.yaml
