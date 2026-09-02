@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NotaryCore.Api.Data;
-using NotaryCore.Domain.Enums;
-using NotaryCore.Domain.Entities;
+using NotaryCore.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<NotarycoreDbContext>(options =>
@@ -10,3 +9,9 @@ builder.Services.AddDbContext<NotarycoreDbContext>(options =>
     );
 });
 var app = builder.Build();
+
+app.MapPersonEndPoints();
+app.MapProtocolEndPoints();
+app.MapActEndpoint();
+
+app.Run();

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotaryCore.Api.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NotaryCore.Api.Migrations
 {
     [DbContext(typeof(NotarycoreDbContext))]
-    partial class NotarycoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260901235312_AddProtocolActRelations")]
+    partial class AddProtocolActRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +75,7 @@ namespace NotaryCore.Api.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("ActParts");
+                    b.ToTable("ActPart");
                 });
 
             modelBuilder.Entity("NotaryCore.Domain.Entities.Person", b =>
@@ -136,7 +139,7 @@ namespace NotaryCore.Api.Migrations
             modelBuilder.Entity("NotaryCore.Domain.Entities.Act", b =>
                 {
                     b.HasOne("NotaryCore.Domain.Entities.Protocol", "Protocol")
-                        .WithMany("Acts")
+                        .WithMany()
                         .HasForeignKey("ProtocolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -171,11 +174,6 @@ namespace NotaryCore.Api.Migrations
             modelBuilder.Entity("NotaryCore.Domain.Entities.Person", b =>
                 {
                     b.Navigation("ActParts");
-                });
-
-            modelBuilder.Entity("NotaryCore.Domain.Entities.Protocol", b =>
-                {
-                    b.Navigation("Acts");
                 });
 #pragma warning restore 612, 618
         }
