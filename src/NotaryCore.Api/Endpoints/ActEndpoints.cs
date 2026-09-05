@@ -8,9 +8,9 @@ public static class ActEndpoint
 {
     public static void MapActEndpoint(this WebApplication app)
     {
-        var actGroup = app.MapGroup("/acts");
+        var actsGroup = app.MapGroup("/acts");
 
-        actGroup.MapGet("/{id}", async (int id, NotarycoreDbContext db) =>
+        actsGroup.MapGet("/{id}", async (int id, NotarycoreDbContext db) =>
         {
             Act? act = await db.Acts.FindAsync(id);
             if(act == null)
@@ -20,18 +20,18 @@ public static class ActEndpoint
 
             return Results.Ok(act);
         });
-        actGroup.MapGet("/", async (NotarycoreDbContext db) =>
+        actsGroup.MapGet("/", async (NotarycoreDbContext db) =>
         {
            List<Act> actslist = await db.Acts.ToListAsync();  
            return Results.Ok(actslist);
         });
-        actGroup.MapPost("/", async (Act act, NotarycoreDbContext db) =>
+        actsGroup.MapPost("/", async (Act act, NotarycoreDbContext db) =>
         {
             db.Acts.Add(act);
             await db.SaveChangesAsync();
             return Results.Created($"/acts/{act.Id}", act);
         });
-        actGroup.MapPut("/{id}", async (int id, Act actUpdate, NotarycoreDbContext db) =>
+        actsGroup.MapPut("/{id}", async (int id, Act actUpdate, NotarycoreDbContext db) =>
         {
             Act? acts = await db.Acts.FindAsync(id);
             if(acts == null)
@@ -44,7 +44,7 @@ public static class ActEndpoint
             await db.SaveChangesAsync();
             return Results.Ok(acts);
         });
-        actGroup.MapDelete("/{id}", async (int id, NotarycoreDbContext db) =>
+        actsGroup.MapDelete("/{id}", async (int id, NotarycoreDbContext db) =>
         {
             Act? act = await db.Acts.FindAsync(id);
             if(act == null)
@@ -54,6 +54,85 @@ public static class ActEndpoint
             db.Acts.Remove(act);
             await db.SaveChangesAsync();
             return Results.NoContent(); 
+        });
+        actsGroup.MapPost("/{id}/parts", async (int id, ActPart part, NotarycoreDbContext db) =>
+        {
+            Act? act = await db.Acts.FindAsync(id);
+            if (act == null)
+            {
+                return Results.NotFound();
+            }
+            Person? person = await db.Persons.FindAsync(part.PersonId);
+            if (person == null)
+            {
+                return Results.NotFound("Person not found");
+            }
+            part.ActId = id;
+            db.ActParts.Add(part);
+            await db.SaveChangesAsync();
+            return Results.Created($"/acts/{id}/parts/{part.Id}", part);
+        });
+        actsGroup.MapGet("/{id}/parts", async (int id, NotarycoreDbContext db) =>
+        {
+           Act? act = await db.Acts.FindAsync(id);
+           if (act == null)
+           {
+                return Results.NotFound();
+           }
+           List<ActPart> actParts = await db.ActParts.Where(ap => ap.ActId == id).ToListAsync();
+           return Results.Ok(actParts);
+        });
+        actsGroup.MapGet("/{id}/parts/{partId}", async (int id, int partid, NotarycoreDbContext db) =>
+        {
+           Act? act = await db.Acts.FindAsync(id);
+           if (act == null)
+           {
+                return Results.NotFound();
+           }
+           ActPart? actParts = await db.ActParts.FirstOrDefaultAsync(ap => ap.Id == partid && ap.ActId == id);
+           if(actParts == null)
+            {
+                return Results.NotFound();
+            }
+           return Results.Ok(actParts);
+        });
+        actsGroup.MapDelete("/{id}/parts/{partId}", async (int id, int partid, NotarycoreDbContext db) =>
+        {
+            Act? act = await db.Acts.FindAsync(id);
+            if (act == null)
+            {
+                return Results.NotFound();
+            }
+            ActPart? actpart = await db.ActParts.FirstOrDefaultAsync(ap => ap.Id == partid && ap.ActId == id);
+            if(actpart == null)
+            {
+                return Results.NotFound();
+            }
+            db.ActParts.Remove(actpart);
+            await db.SaveChangesAsync();
+            return Results.NoContent();
+        });
+        actsGroup.MapPut("/{id}/parts/{partId}", async (int id, int partid, ActPart updatePart, NotarycoreDbContext db) =>
+        {
+            Act? act = await db.Acts.FindAsync(id);
+            if(act == null)
+            {
+                return Results.NotFound();
+            }
+            ActPart? actpart = await db.ActParts.FirstOrDefaultAsync(ap => ap.Id == partid && ap.ActId == id);
+            if(actpart == null)
+            {
+                return Results.NotFound();
+            }
+            Person? person = await db.Persons.FirstOrDefaultAsync(p => p.Id == updatePart.PersonId);
+            if(person == null)
+            {
+                return Results.NotFound();
+            }
+            actpart.PersonId = updatePart.PersonId;
+            actpart.Role = updatePart.Role;
+            await db.SaveChangesAsync();
+            return Results.Ok();
         });
     }
 }

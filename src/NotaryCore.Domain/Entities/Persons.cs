@@ -1,6 +1,7 @@
 namespace NotaryCore.Domain.Entities;
 public class Person
 {
+    public List<ActPart> ActParts { get; set; } = [];
     public int Id { get; set; }
     public required string Cpf { get; set; }
     public required string Name { get; set; }
