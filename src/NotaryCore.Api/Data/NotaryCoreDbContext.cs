@@ -13,6 +13,8 @@ public class NotarycoreDbContext : DbContext
     public DbSet<Protocol> Protocols { get; set; }
     public DbSet<Act> Acts { get; set; }
     public DbSet<ActPart> ActParts { get; set; }
+    public DbSet<Property> Properties { get; set; }
+    public DbSet<ActProperty> ActProperties { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -32,5 +34,15 @@ public class NotarycoreDbContext : DbContext
         .HasOne(a => a.Protocol)
         .WithMany(p => p.Acts)
         .HasForeignKey(a => a.ProtocolId);
+    
+    modelBuilder.Entity<ActProperty>()
+        .HasOne(ap => ap.Act)
+        .WithMany(a => a.ActProperties)
+        .HasForeignKey(ap => ap.ActId);
+
+    modelBuilder.Entity<ActProperty>()
+        .HasOne(ap => ap.Property)
+        .WithMany(p => p.ActProperties)
+        .HasForeignKey(ap => ap.PropertyId);
 }
 }
