@@ -67,19 +67,53 @@ NotaryCore/
     │   ├── NotaryCore.Cli.csproj
     │   └── Program.cs
     │
-    └── NotaryCore.Domain/
-        ├── Entities/
-        │   ├── Acts.cs
-        │   ├── Acts_parts.cs
-        │   ├── Persons.cs
-        │   ├── Property.cs
-        │   └── Protocols.cs
-        │
-        ├── Enums/
-        │   └── Role.cs
-        │
-        └── NotaryCore.Domain.csproj
+    ├── NotaryCore.Domain/
+    │   ├── Entities/
+    │   │   ├── Acts.cs
+    │   │   ├── Acts_parts.cs
+    │   │   ├── Persons.cs
+    │   │   ├── Property.cs
+    │   │   └── Protocols.cs
+    │   │
+    │   ├── Enums/
+    │   │   └── Role.cs
+    │   │
+    │   └── NotaryCore.Domain.csproj
+    │
+    └── NotaryCore.Web/
+        ├── src/
+        │   ├── api/
+        │   │   └── client.ts
+        │   ├── components/
+        │   │   ├── ActsList.tsx
+        │   │   ├── Dashboard.tsx
+        │   │   ├── PersonsList.tsx
+        │   │   └── ProtocolsList.tsx
+        │   ├── types/
+        │   │   └── index.ts
+        │   ├── App.tsx
+        │   ├── index.css
+        │   └── main.tsx
+        ├── index.html
+        ├── package.json
+        ├── tsconfig.json
+        └── vite.config.ts
 ```
+
+## How to Run
+
+### Backend (API)
+```bash
+dotnet run --project src/NotaryCore.Api
+```
+A API iniciará em `http://localhost:5257`.
+
+### Frontend (Web)
+```bash
+cd src/NotaryCore.Web
+npm run dev
+```
+O front-end iniciará em `http://localhost:5173`.
 
 ## Documentation
 
