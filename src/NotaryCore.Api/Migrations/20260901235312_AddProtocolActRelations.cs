@@ -5,10 +5,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace NotaryCore.Api.Migrations
 {
-    /// <inheritdoc />
     public partial class AddProtocolActRelations : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
@@ -69,7 +67,6 @@ namespace NotaryCore.Api.Migrations
                 onDelete: ReferentialAction.Cascade);
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(

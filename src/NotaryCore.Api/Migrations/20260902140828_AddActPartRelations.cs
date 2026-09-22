@@ -4,10 +4,8 @@
 
 namespace NotaryCore.Api.Migrations
 {
-    /// <inheritdoc />
     public partial class AddActPartRelations : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
@@ -58,7 +56,6 @@ namespace NotaryCore.Api.Migrations
                 onDelete: ReferentialAction.Cascade);
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(

@@ -5,10 +5,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace NotaryCore.Api.Migrations
 {
-    /// <inheritdoc />
     public partial class AddPropertyRelations : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -65,7 +63,6 @@ namespace NotaryCore.Api.Migrations
                 column: "PropertyId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

@@ -1,10 +1,6 @@
-/**
- * Papéis que uma pessoa pode desempenhar em um ato notarial.
- * Espelha o enum Role do C# (NotaryCore.Domain.Enums.Role).
- */
 export enum Role {
-  Buyer = 0,  // Comprador (Outorgado)
-  Seller = 1, // Vendedor (Outorgante)
+  Buyer = 0,
+  Seller = 1,
 }
 
 export const RoleLabels: Record<Role, string> = {
@@ -12,22 +8,14 @@ export const RoleLabels: Record<Role, string> = {
   [Role.Seller]: 'Vendedor (Outorgante)',
 };
 
-/**
- * Tipos de Atos Notariais.
- * Espelha o enum AcType do C# (NotaryCore.Domain.Enums.AcType).
- */
 export enum ActType {
-  PurchaseAndSale = 0, // Compra e Venda
+  PurchaseAndSale = 0,
 }
 
 export const ActTypeLabels: Record<ActType, string> = {
   [ActType.PurchaseAndSale]: 'Escritura de Compra e Venda',
 };
 
-/**
- * Representa uma Pessoa (Física ou Jurídica).
- * Espelha a entidade Person (NotaryCore.Domain.Entities.Person).
- */
 export interface Person {
   id: number;
   cpf: string;
@@ -39,15 +27,8 @@ export interface Person {
   address: string;
 }
 
-/**
- * Dados necessários para cadastrar uma nova pessoa.
- */
 export type CreatePersonDTO = Omit<Person, 'id'>;
 
-/**
- * Representa a vinculação de uma parte (pessoa + papel) a um ato notarial.
- * Espelha a entidade ActPart (NotaryCore.Domain.Entities.ActPart).
- */
 export interface ActPart {
   id: number;
   actId: number;
@@ -56,10 +37,6 @@ export interface ActPart {
   role: Role;
 }
 
-/**
- * Representa um Protocolo de atendimento no cartório.
- * Espelha a entidade Protocol (NotaryCore.Domain.Entities.Protocol).
- */
 export interface Protocol {
   id: number;
   openingDate?: string | null;
@@ -67,18 +44,11 @@ export interface Protocol {
   acts?: Act[];
 }
 
-/**
- * Dados para criação de um novo protocolo.
- */
 export type CreateProtocolDTO = {
   openingDate?: string | null;
   status: string;
 };
 
-/**
- * Representa um Ato Notarial (ex.: Escritura de Compra e Venda).
- * Espelha a entidade Act (NotaryCore.Domain.Entities.Act).
- */
 export interface Act {
   id: number;
   protocolId: number;
@@ -89,9 +59,6 @@ export interface Act {
   actParts?: ActPart[];
 }
 
-/**
- * Dados para criação de um novo ato notarial.
- */
 export type CreateActDTO = {
   protocolId: number;
   type: ActType;

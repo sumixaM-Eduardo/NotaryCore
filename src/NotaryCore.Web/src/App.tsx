@@ -12,11 +12,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      {/* Barra de Navegação Superior */}
       <header className="bg-slate-900 text-white shadow-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo e Título */}
             <div
               onClick={() => setActiveTab('dashboard')}
               className="flex items-center space-x-3 cursor-pointer select-none"
@@ -33,8 +31,6 @@ export default function App() {
                 </span>
               </div>
             </div>
-
-            {/* Menu de Abas */}
             <nav className="flex items-center space-x-1 sm:space-x-2">
               <button
                 onClick={() => setActiveTab('dashboard')}
@@ -84,33 +80,15 @@ export default function App() {
                 <span className="hidden sm:inline">Atos Notariais</span>
               </button>
             </nav>
-
-            {/* Status do Front-end */}
-            <div className="hidden md:flex items-center space-x-2 text-xs bg-slate-800/80 px-3 py-1.5 rounded-full text-slate-300 border border-slate-700">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Vite + React 19</span>
-            </div>
           </div>
         </div>
       </header>
-
-      {/* Conteúdo Dinâmico */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {activeTab === 'dashboard' && <Dashboard onNavigate={setActiveTab} />}
         {activeTab === 'persons' && <PersonsList />}
         {activeTab === 'protocols' && <ProtocolsList />}
         {activeTab === 'acts' && <ActsList />}
       </main>
-
-      {/* Rodapé */}
-      <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>NotaryCore &bull; Sistema de Automação e Gestão Cartorária</span>
-          <span className="text-slate-500 font-mono text-[11px]">
-            API: http://localhost:5257 &bull; Web: http://localhost:5173
-          </span>
-        </div>
-      </footer>
     </div>
   );
 }

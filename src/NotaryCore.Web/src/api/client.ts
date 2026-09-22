@@ -1,26 +1,16 @@
 import { Person, CreatePersonDTO, Protocol, CreateProtocolDTO, Act, CreateActDTO } from '../types';
 
-/**
- * Cliente de API simples e didático usando a Fetch API nativa do navegador.
- * Como configuramos o proxy no vite.config.ts, requisições para '/persons',
- * '/protocols' e '/acts' são automaticamente redirecionadas para a API ASP.NET Core (http://localhost:5257).
- */
-
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
     const errorText = await response.text().catch(() => '');
     throw new Error(`Erro na API (${response.status}): ${errorText || response.statusText}`);
   }
-  // Se a resposta for 204 No Content, retorna objeto vazio
   if (response.status === 204) {
     return {} as T;
   }
   return response.json();
 }
 
-// ==========================================
-// MÓDULO: Pessoas / Partes
-// ==========================================
 export const personApi = {
   async getAll(): Promise<Person[]> {
     const res = await fetch('/persons');
@@ -58,9 +48,6 @@ export const personApi = {
   },
 };
 
-// ==========================================
-// MÓDULO: Protocolos
-// ==========================================
 export const protocolApi = {
   async getAll(): Promise<Protocol[]> {
     const res = await fetch('/protocols');
@@ -98,9 +85,6 @@ export const protocolApi = {
   },
 };
 
-// ==========================================
-// MÓDULO: Atos Notariais
-// ==========================================
 export const actApi = {
   async getAll(): Promise<Act[]> {
     const res = await fetch('/acts');
